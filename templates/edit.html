@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Rating</title>
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* This will make the body take the full height of the viewport */
+    }
+    
+    form {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    
+    p, label {
+      margin-bottom: 10px;
+    }
+    
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+</style>
+<body>
+    {% for bk in books %}
+        {% if bk["ID"] == bk_id %}
+            <form action="{{ url_for('edit_rating', book_id=bk_id) }}" method="POST">
+                <p><b>Title: {{ bk["Title"] }}</b></p>
+                <p><b>Author: {{ bk["Author"] }}</b></p>
+                <p><b>Current Rating: {{ bk["Rating"] }}</b></p>
+                <br>
+                <label>Enter New Rating</label>
+                <input type="number" name="new_rating" required>
+                <button type="submit">Change Rating</button>
+            </form>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
